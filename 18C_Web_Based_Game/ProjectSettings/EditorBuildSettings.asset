@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: cdc46bed9b438064996f74d65e873197
   - enabled: 1
-    path: Assets/Scenes/Austin's_Test_environment.unity
+    path: Assets/Scenes/Game_Scene1.unity
     guid: 9f671d72885f8e3429dd009e3f32f8d3
   m_configObjects: {}
