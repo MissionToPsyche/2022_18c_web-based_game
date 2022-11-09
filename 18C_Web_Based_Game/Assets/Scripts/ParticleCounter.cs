@@ -11,26 +11,50 @@ public class ParticleCounter : MonoBehaviour
     public int crust_particle_count = 0;
 
     //Used to store the particles 
-    //public List<GameObject> particles = new List<GameObject>();
     public List<GameObject> particles;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Counts the number of each type of particle at start
-        foreach(GameObject x in particles)
+        //Get all active game objects and put them in an array
+        object[] obj = GameObject.FindObjectsOfType(typeof(GameObject));
+
+        //Now parse through the array elements and add the elements that are 
+        //of an actual particle type to the particles list
+        foreach(object o in obj)
         {
-            if(x.tag == "MetalCore_Particle")
+            GameObject g = (GameObject)o;
+            //Debug.Log(g.name);
+            if (g.tag == "MetalCore_Particle")
+            {
+                particles.Add(g);
+            }
+
+            if (g.tag == "Mantle_Particle")
+            {
+                particles.Add(g);
+            }
+
+            if (g.tag == "Crust_Particle")
+            {
+                particles.Add(g);
+            }
+        }
+
+        //Counts the number of each type of particle at start
+        foreach (GameObject x in obj)
+        {
+            if (x.tag == "MetalCore_Particle")
             {
                 metal_particle_count++;
             }
 
-            if(x.tag == "Mantle_Particle")
+            if (x.tag == "Mantle_Particle")
             {
                 mantle_particle_count++;
             }
 
-            if(x.tag == "Crust_Particle")
+            if (x.tag == "Crust_Particle")
             {
                 crust_particle_count++;
             }
