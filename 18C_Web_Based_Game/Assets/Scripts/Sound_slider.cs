@@ -6,8 +6,6 @@ using UnityEngine.Audio;
 public class Sound_slider : MonoBehaviour
 {
     public AudioMixer audioMixer;
-    // Start is called before the first frame update
-    
 
     public void setVolume(float volume)
     {
