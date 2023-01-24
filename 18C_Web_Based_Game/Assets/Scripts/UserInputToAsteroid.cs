@@ -85,9 +85,80 @@ public class UserInputToAsteroid : MonoBehaviour
 
     public void HandleMaterialInput(int val)
     {
-        if(val >= 0 && val <= 3)
+        //0 = Metal
+        //1 = Mantle
+        //2 = Crust
+        if(val >= 0 && val <= 2)
         {
             materialSelected = val;
+        }
+    }
+
+    //This method is called when the player selects a drop-down option for Location.
+    //it adjusts the otherAsteroid location according to where the center particle of
+    //   Psyche is positioned
+    public void HandleLocationInput(int val)
+    {
+        Vector3 centerParticleLocation = GameObject.Find("MiddleAsteroidParticle").transform.position;
+        //GameObject centerParticle = GameObject.Find("MiddleAsteroidParticle"); 
+        switch (val)
+        {
+            //Left
+            case 0:
+                Vector3 otherAsteroidPosition = new Vector3(-10, 0, 0);
+                otherAsteroidPosition = otherAsteroidPosition + centerParticleLocation;
+                otherAsteroid.transform.position = otherAsteroidPosition;
+                break;
+            
+            //Top-Left
+            case 1:
+                Vector3 otherAsteroidPosition1 = new Vector3(-7, 5, 0);
+                otherAsteroidPosition1 = otherAsteroidPosition1 + centerParticleLocation;
+                otherAsteroid.transform.position = otherAsteroidPosition1;
+                break;
+
+            //Top
+            case 2:
+                Vector3 otherAsteroidPosition2 = new Vector3(0, 7, 0);
+                otherAsteroidPosition2 = otherAsteroidPosition2 + centerParticleLocation;
+                otherAsteroid.transform.position = otherAsteroidPosition2;
+                break;
+            
+            //Top-Right
+            case 3:
+                Vector3 otherAsteroidPosition3 = new Vector3(7, 5, 0);
+                otherAsteroidPosition3 = otherAsteroidPosition3 + centerParticleLocation;
+                otherAsteroid.transform.position = otherAsteroidPosition3;
+                break;
+
+            //Right
+            case 4:
+                Vector3 otherAsteroidPosition4 = new Vector3(10, 0, 0);
+                otherAsteroidPosition4 = otherAsteroidPosition4 + centerParticleLocation;
+                otherAsteroid.transform.position = otherAsteroidPosition4;
+                break;
+
+            //Bottom-Right
+            case 5:
+                Vector3 otherAsteroidPosition5 = new Vector3(7, -5, 0);
+                otherAsteroidPosition5 = otherAsteroidPosition5 + centerParticleLocation;
+                otherAsteroid.transform.position = otherAsteroidPosition5;
+                break;
+
+            //Bottom
+            case 6:
+                Vector3 otherAsteroidPosition6 = new Vector3(0, -5, 0);
+                otherAsteroidPosition6 = otherAsteroidPosition6 + centerParticleLocation;
+                otherAsteroid.transform.position = otherAsteroidPosition6;
+                break;
+
+            //Bottom-Left
+            case 7:
+                Vector3 otherAsteroidPosition7 = new Vector3(-7, -5, 0);
+                otherAsteroidPosition7 = otherAsteroidPosition7 + centerParticleLocation;
+                otherAsteroid.transform.position = otherAsteroidPosition7;
+                break;
+
         }
     }
 
