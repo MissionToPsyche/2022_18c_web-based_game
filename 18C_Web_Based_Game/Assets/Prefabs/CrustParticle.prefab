@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9065731268813635632}
   - component: {fileID: 9065731268813635635}
   - component: {fileID: 9065731268813635634}
+  - component: {fileID: -7181992042040894227}
   m_Layer: 0
   m_Name: CrustParticle
   m_TagString: Crust_Particle
@@ -137,3 +138,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-7181992042040894227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065731268813635629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f282c90ef1fc3cf4f9b05389d8cc76e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partOfPsyche: 0

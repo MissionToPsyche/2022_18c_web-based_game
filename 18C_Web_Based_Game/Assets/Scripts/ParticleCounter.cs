@@ -67,6 +67,49 @@ public class ParticleCounter : MonoBehaviour
        
     }
 
+    //This method will be called from otherAsteroids AfterLaunchTimer.cs
+    //It will parse though all the gameobjects and add the ones
+    //that have partOfPsyche as true in the PsycheParticleCounter.cs script
+    public void countWhatParticlesArePartOfPsyche()
+    {
+        //reset the counters
+        metal_particle_count = 0;
+        mantle_particle_count = 0;
+        crust_particle_count = 0;
+
+        //Will hold all the particles where partOfPsyche == true
+        //List<GameObject> PsycheParticles; 
+
+        object[] obj = GameObject.FindObjectsOfType(typeof(GameObject));
+        foreach (object o in obj)
+        {
+            GameObject g = (GameObject)o;
+            PsycheParticleCounter script = g.GetComponent<PsycheParticleCounter>();
+
+            if (g.tag == "MetalCore_Particle" && script.partOfPsyche == true)
+            {
+                //PsycheParticles.Add(g);
+                metal_particle_count++;
+            }
+
+            else if (g.tag == "Mantle_Particle" && script.partOfPsyche == true)
+            {
+                //PsycheParticles.Add(g);
+                mantle_particle_count++;
+            }
+
+            else if (g.tag == "Crust_Particle" && script.partOfPsyche == true)
+            {
+                //PsycheParticles.Add(g);
+                crust_particle_count++;
+            }
+            else
+            {
+                particles.Remove(g);
+            }
+        }
+    }
+
     void RemoveParticleCount(GameObject particle)
     {
         if(particle.tag == "MetalCore_Particle")
