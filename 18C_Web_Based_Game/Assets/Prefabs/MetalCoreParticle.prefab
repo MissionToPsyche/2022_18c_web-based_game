@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 433384561461339836}
   - component: {fileID: 433384561461339839}
   - component: {fileID: 433384561461339838}
+  - component: {fileID: -3678748828795239451}
   m_Layer: 0
   m_Name: MetalCoreParticle
   m_TagString: MetalCore_Particle
@@ -137,3 +138,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-3678748828795239451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 433384561461339809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f282c90ef1fc3cf4f9b05389d8cc76e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partOfPsyche: 0

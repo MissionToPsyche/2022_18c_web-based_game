@@ -77,6 +77,10 @@ public class UserInputToAsteroid : MonoBehaviour
             float vely = velocityInput * Mathf.Sin(angleInput * Mathf.Deg2Rad);
             rb.velocity = new Vector2(velx, vely);
 
+            //Enable the timer contained in the AfterLaunchTimer.cs script
+            AfterLaunchTimer script = GameObject.Find("OtherAsteroid").GetComponent<AfterLaunchTimer>();
+            script.enabled = true;
+
             //Update Clicked Button to true
             ClickedButton = true;
         }
