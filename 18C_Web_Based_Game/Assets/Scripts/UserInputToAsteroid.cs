@@ -32,57 +32,73 @@ public class UserInputToAsteroid : MonoBehaviour
         //Only allow the user to click launch once
         if (ClickedButton == false)
         {
+            bool preventApplicationofParameter = false;
+
             massInput = Int32.Parse(massInputField.text);
+            if (massInput < 0 || massInput > 30)
+            {
+                massInputField.text = "Not Valid";
+                preventApplicationofParameter = true;
+            }
+
             velocityInput = Int32.Parse(velocityInputField.text);
+            if(velocityInputField.text == "")
+            {
+                velocityInputField.text = "Not Valid";
+                preventApplicationofParameter = true;
+            }
+
             angleInput = Int32.Parse(angleInputField.text);
-            
-            
-            //Handle the user material input
-            otherAsteroidRenderer = otherAsteroid.GetComponent<Renderer>();
 
-            if(materialSelected == 0)
+            if (preventApplicationofParameter == false)
             {
-                materialInput = "Metal";
-                otherAsteroid.tag = "MetalCore_Particle";
-                otherAsteroidColor = new Color(0.8588f, 0.3686f, 0f, 1f);
-                otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
+                //Handle the user material input
+                otherAsteroidRenderer = otherAsteroid.GetComponent<Renderer>();
+
+                if (materialSelected == 0)
+                {
+                    materialInput = "Metal";
+                    otherAsteroid.tag = "OA_MetalCore_Particle";
+                    otherAsteroidColor = new Color(0.8588f, 0.3686f, 0f, 1f);
+                    otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
+                }
+                else if (materialSelected == 1)
+                {
+                    materialInput = "Mantle";
+                    otherAsteroid.tag = "OA_Mantle_Particle";
+                    otherAsteroidColor = new Color(0.5566f, 0.2389f, 0f, 1f);
+                    otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
+                }
+                else if (materialSelected == 2)
+                {
+                    materialInput = "Crust";
+                    otherAsteroid.tag = "OA_Crust_Particle";
+                    otherAsteroidColor = new Color(0.3113f, 0.1344f, 0.0011f, 1f);
+                    otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
+                }
+                else { materialInput = "Something went wrong (materialInput)"; }
+
+                Debug.Log("mass: " + massInput + " velocity: " + velocityInput +
+                          " angle: " + angleInput + " material: " + materialInput);
+
+                //Now acually set the given parameters to the asteroid
+                Rigidbody2D rb = otherAsteroid.GetComponent<Rigidbody2D>();
+
+                //mass
+                rb.mass = massInput;
+
+                //velocity and angle
+                float velx = velocityInput * Mathf.Cos(angleInput * Mathf.Deg2Rad);
+                float vely = velocityInput * Mathf.Sin(angleInput * Mathf.Deg2Rad);
+                rb.velocity = new Vector2(velx, vely);
+
+                //Enable the timer contained in the AfterLaunchTimer.cs script
+                AfterLaunchTimer script = GameObject.Find("OtherAsteroid").GetComponent<AfterLaunchTimer>();
+                script.enabled = true;
+
+                //Update Clicked Button to true
+                ClickedButton = true;
             }
-            else if(materialSelected == 1)
-            {
-                materialInput = "Mantle";
-                otherAsteroid.tag = "Mantle_Particle";
-                otherAsteroidColor = new Color(0.5566f, 0.2389f, 0f, 1f);
-                otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
-            }
-            else if(materialSelected == 2)
-            {
-                materialInput = "Crust";
-                otherAsteroid.tag = "Crust_Particle";
-                otherAsteroidColor = new Color(0.3113f, 0.1344f, 0.0011f, 1f);
-                otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
-            }
-            else { materialInput = "Something went wrong (materialInput)"; }
-
-            Debug.Log("mass: " + massInput + " velocity: " + velocityInput +
-                      " angle: " + angleInput + " material: " + materialInput);
-
-            //Now acually set the given parameters to the asteroid
-            Rigidbody2D rb = otherAsteroid.GetComponent<Rigidbody2D>();
-            
-            //mass
-            rb.mass = massInput;
-
-            //velocity and angle
-            float velx = velocityInput * Mathf.Cos(angleInput * Mathf.Deg2Rad);
-            float vely = velocityInput * Mathf.Sin(angleInput * Mathf.Deg2Rad);
-            rb.velocity = new Vector2(velx, vely);
-
-            //Enable the timer contained in the AfterLaunchTimer.cs script
-            AfterLaunchTimer script = GameObject.Find("OtherAsteroid").GetComponent<AfterLaunchTimer>();
-            script.enabled = true;
-
-            //Update Clicked Button to true
-            ClickedButton = true;
         }
 
     }
@@ -166,9 +182,14 @@ public class UserInputToAsteroid : MonoBehaviour
         }
     }
 
+    public void setOtherAsteroid()
+    {
+        otherAsteroid = GameObject.Find("OtherAsteroid");
+    }
     //Runs before any start(), lets us set the "OtherAsteroid" parameters
     private void Awake()
     {
         testAsteroidSpeed = GameObject.Find("OtherAsteroid").GetComponent<TestAsteroidSpeed>();
+        
     }
 }

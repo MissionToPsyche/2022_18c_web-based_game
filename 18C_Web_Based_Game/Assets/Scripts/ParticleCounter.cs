@@ -86,21 +86,33 @@ public class ParticleCounter : MonoBehaviour
             GameObject g = (GameObject)o;
             PsycheParticleCounter script = g.GetComponent<PsycheParticleCounter>();
 
-            if (g.tag == "MetalCore_Particle" && script.partOfPsyche == true)
+            if (g.tag == "MetalCore_Particle" || g.tag == "OA_MetalCore_Particle" && script.partOfPsyche == true)
             {
                 //PsycheParticles.Add(g);
+                if(g.tag == "OA_MetalCore_Particle")
+                {
+                    particles.Add(g);
+                }
                 metal_particle_count++;
             }
 
-            else if (g.tag == "Mantle_Particle" && script.partOfPsyche == true)
+            else if (g.tag == "Mantle_Particle" || g.tag == "OA_Mantle_Particle" && script.partOfPsyche == true)
             {
                 //PsycheParticles.Add(g);
+                if (g.tag == "OA_Mantle_Particle")
+                {
+                    particles.Add(g);
+                }
                 mantle_particle_count++;
             }
 
-            else if (g.tag == "Crust_Particle" && script.partOfPsyche == true)
+            else if (g.tag == "Crust_Particle" || g.tag == "OA_Crust_Particle" && script.partOfPsyche == true)
             {
                 //PsycheParticles.Add(g);
+                if (g.tag == "OA_Crust_Particle")
+                {
+                    particles.Add(g);
+                }
                 crust_particle_count++;
             }
             else

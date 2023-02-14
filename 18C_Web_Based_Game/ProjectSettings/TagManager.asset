@@ -7,6 +7,9 @@ TagManager:
   - MetalCore_Particle
   - Mantle_Particle
   - Crust_Particle
+  - OA_MetalCore_Particle
+  - OA_Mantle_Particle
+  - OA_Crust_Particle
   layers:
   - Default
   - TransparentFX
