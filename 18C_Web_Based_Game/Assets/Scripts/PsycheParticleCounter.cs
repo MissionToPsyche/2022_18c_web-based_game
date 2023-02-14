@@ -16,6 +16,16 @@ public class PsycheParticleCounter : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        //Determine if it is the central asteroid particle of Psyche
+        if (this.name == "MiddleAsteroidParticle")
+        {
+            partOfPsyche = true;
+        }
+    }
+
+    //This propagates the partOfPsyche boolean throughout the particles touching the center particle
     void OnCollisionStay2D (Collision2D collision)
     {
         //Debug.Log("we hit something");
