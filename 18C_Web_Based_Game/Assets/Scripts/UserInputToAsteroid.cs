@@ -96,11 +96,56 @@ public class UserInputToAsteroid : MonoBehaviour
                 AfterLaunchTimer script = GameObject.Find("OtherAsteroid").GetComponent<AfterLaunchTimer>();
                 script.enabled = true;
 
+                //Delete the ProjectionLine
+                if (GameObject.Find("ProjectionLine") != null)
+                {
+                    Destroy(GameObject.Find("ProjectionLine"));
+                    Debug.Log("ProjectionLine Destroyed!");
+                }
+
                 //Update Clicked Button to true
                 ClickedButton = true;
             }
         }
 
+    }
+
+    private LineRenderer lineRenderer;
+
+    public void HandleAngleInput()
+    {
+        float distance = 5f;
+
+        GameObject otherAsteroid = GameObject.Find("OtherAsteroid");
+
+        DeleteProjectedLine();
+
+        lineRenderer = new GameObject("ProjectionLine").AddComponent<LineRenderer>();
+        lineRenderer.startColor = Color.magenta;
+        lineRenderer.endColor = Color.magenta;
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.positionCount = 2;
+        lineRenderer.useWorldSpace = true;
+
+        //Calculate the end point of the line
+        angleInput = Int32.Parse(angleInputField.text);
+        float x = otherAsteroid.transform.position.x + distance * Mathf.Cos(angleInput * Mathf.Deg2Rad);
+        float y = otherAsteroid.transform.position.y + distance * Mathf.Sin(angleInput * Mathf.Deg2Rad);
+
+        //Draw the line
+        lineRenderer.SetPosition(0, otherAsteroid.transform.position);
+        lineRenderer.SetPosition(1, new Vector3(x, y, 1f));
+
+    }
+
+    public void DeleteProjectedLine()
+    {
+        if (GameObject.Find("ProjectionLine") != null)
+        {
+            Destroy(GameObject.Find("ProjectionLine"));
+            Debug.Log("ProjectionLine Destroyed!");
+        }
     }
 
     public void HandleMaterialInput(int val)
@@ -128,6 +173,8 @@ public class UserInputToAsteroid : MonoBehaviour
                 Vector3 otherAsteroidPosition = new Vector3(-10, 0, 0);
                 otherAsteroidPosition = otherAsteroidPosition + centerParticleLocation;
                 otherAsteroid.transform.position = otherAsteroidPosition;
+                DeleteProjectedLine();
+                HandleAngleInput();
                 break;
             
             //Top-Left
@@ -135,6 +182,8 @@ public class UserInputToAsteroid : MonoBehaviour
                 Vector3 otherAsteroidPosition1 = new Vector3(-7, 5, 0);
                 otherAsteroidPosition1 = otherAsteroidPosition1 + centerParticleLocation;
                 otherAsteroid.transform.position = otherAsteroidPosition1;
+                DeleteProjectedLine();
+                HandleAngleInput();
                 break;
 
             //Top
@@ -142,6 +191,8 @@ public class UserInputToAsteroid : MonoBehaviour
                 Vector3 otherAsteroidPosition2 = new Vector3(0, 7, 0);
                 otherAsteroidPosition2 = otherAsteroidPosition2 + centerParticleLocation;
                 otherAsteroid.transform.position = otherAsteroidPosition2;
+                DeleteProjectedLine();
+                HandleAngleInput();
                 break;
             
             //Top-Right
@@ -149,6 +200,8 @@ public class UserInputToAsteroid : MonoBehaviour
                 Vector3 otherAsteroidPosition3 = new Vector3(7, 5, 0);
                 otherAsteroidPosition3 = otherAsteroidPosition3 + centerParticleLocation;
                 otherAsteroid.transform.position = otherAsteroidPosition3;
+                DeleteProjectedLine();
+                HandleAngleInput();
                 break;
 
             //Right
@@ -156,6 +209,8 @@ public class UserInputToAsteroid : MonoBehaviour
                 Vector3 otherAsteroidPosition4 = new Vector3(10, 0, 0);
                 otherAsteroidPosition4 = otherAsteroidPosition4 + centerParticleLocation;
                 otherAsteroid.transform.position = otherAsteroidPosition4;
+                DeleteProjectedLine();
+                HandleAngleInput();
                 break;
 
             //Bottom-Right
@@ -163,6 +218,8 @@ public class UserInputToAsteroid : MonoBehaviour
                 Vector3 otherAsteroidPosition5 = new Vector3(7, -5, 0);
                 otherAsteroidPosition5 = otherAsteroidPosition5 + centerParticleLocation;
                 otherAsteroid.transform.position = otherAsteroidPosition5;
+                DeleteProjectedLine();
+                HandleAngleInput();
                 break;
 
             //Bottom
@@ -170,6 +227,8 @@ public class UserInputToAsteroid : MonoBehaviour
                 Vector3 otherAsteroidPosition6 = new Vector3(0, -5, 0);
                 otherAsteroidPosition6 = otherAsteroidPosition6 + centerParticleLocation;
                 otherAsteroid.transform.position = otherAsteroidPosition6;
+                DeleteProjectedLine();
+                HandleAngleInput();
                 break;
 
             //Bottom-Left
@@ -177,6 +236,8 @@ public class UserInputToAsteroid : MonoBehaviour
                 Vector3 otherAsteroidPosition7 = new Vector3(-7, -5, 0);
                 otherAsteroidPosition7 = otherAsteroidPosition7 + centerParticleLocation;
                 otherAsteroid.transform.position = otherAsteroidPosition7;
+                DeleteProjectedLine();
+                HandleAngleInput();
                 break;
 
         }
