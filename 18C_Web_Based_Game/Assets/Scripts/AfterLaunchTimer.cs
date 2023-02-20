@@ -10,6 +10,9 @@ public class AfterLaunchTimer : MonoBehaviour
     //testing (can be seen in unity editor)
     public List<GameObject> particles;
 
+    //Used to reenable the UI after a launch
+    public GameObject parentHUD;
+
     void Start()
     {
         StartCoroutine(Countdown());
@@ -113,6 +116,9 @@ public class AfterLaunchTimer : MonoBehaviour
         UserInputToAsteroid inputScript = inputObject.GetComponent<UserInputToAsteroid>();
         inputScript.setOtherAsteroid();
         inputScript.ClickedButton = false;
+
+        //Reenable the UI "HUD Parent"
+        parentHUD.SetActive(true);
     }  
     
 }
