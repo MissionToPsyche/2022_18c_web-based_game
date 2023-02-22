@@ -13,7 +13,9 @@ public class UserInputToAsteroid : MonoBehaviour
     public int velocityInput;
     public int angleInput;
     public string materialInput;
-    
+
+    public TextMeshProUGUI scoreValue;
+
     public TMP_InputField massInputField;
     public TMP_InputField velocityInputField;
     public TMP_InputField angleInputField;
@@ -110,6 +112,15 @@ public class UserInputToAsteroid : MonoBehaviour
 
     }
 
+    // Total Score is updated when 'Evaluate Psyche' button is Clicked
+    public void HandleEvaluateClick()
+    {
+      Debug.Log("Evaluate Clicked");
+      scoreValue = GameObject.Find("Canvas - HUD/HUD Parent/CurScore").GetComponent<TMPro.TextMeshProUGUI>();
+      scoreValue.text = massInput.ToString();
+      Debug.Log("Score Set");
+    }
+
     private LineRenderer lineRenderer;
 
     public void HandleAngleInput()
@@ -165,7 +176,7 @@ public class UserInputToAsteroid : MonoBehaviour
     public void HandleLocationInput(int val)
     {
         Vector3 centerParticleLocation = GameObject.Find("MiddleAsteroidParticle").transform.position;
-        //GameObject centerParticle = GameObject.Find("MiddleAsteroidParticle"); 
+        //GameObject centerParticle = GameObject.Find("MiddleAsteroidParticle");
         switch (val)
         {
             //Left
@@ -176,7 +187,7 @@ public class UserInputToAsteroid : MonoBehaviour
                 DeleteProjectedLine();
                 HandleAngleInput();
                 break;
-            
+
             //Top-Left
             case 1:
                 Vector3 otherAsteroidPosition1 = new Vector3(-7, 5, 0);
@@ -194,7 +205,7 @@ public class UserInputToAsteroid : MonoBehaviour
                 DeleteProjectedLine();
                 HandleAngleInput();
                 break;
-            
+
             //Top-Right
             case 3:
                 Vector3 otherAsteroidPosition3 = new Vector3(7, 5, 0);
@@ -251,6 +262,6 @@ public class UserInputToAsteroid : MonoBehaviour
     private void Awake()
     {
         testAsteroidSpeed = GameObject.Find("OtherAsteroid").GetComponent<TestAsteroidSpeed>();
-        
+
     }
 }
