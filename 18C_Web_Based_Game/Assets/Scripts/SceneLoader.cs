@@ -8,6 +8,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] GameObject Pause_menu;
     public void LoadScene(string sceneName)
     {
+        Time.timeScale = 1f;
 	    SceneManager.LoadScene(sceneName);
     }
     public void Pause()
