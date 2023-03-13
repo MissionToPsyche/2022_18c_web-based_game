@@ -308,7 +308,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Select the material and posistion of asteroid.
+  m_text: 'Select the material and posistion of asteroid.
+
+
+    The material changes
+    the properites of the asteroid and can be used to make the ratio of metal to
+    other partical types better.
+
+
+    The position button allows you to choose from
+    8 different locations around Psyche to have the asteroid origniate from.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -755,7 +764,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The arrow represent the launch direction of the asteroid.
+  m_text: 'The angle can be any number positive or negative. The number entered is
+    read as a degree.
+
+
+    A line is drawn from the asteroid that represents the
+    launch direction of the asteroid.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1101,7 +1115,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Input the mass, velocity and angle of asteroid.
+  m_text: "Input the mass, velocity, angle and material type of the asteroid. \n\nThe
+    mass has a acceptable range of 0 - 30. It will not accept anything less than
+    0 or anything greater than 30.\n\nThe velocity can be any number positive or
+    negative. "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1236,8 +1253,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Observe the collison between asteroid and Psyche, which will last for 10
-    seconds before it get reset.
+  m_text: 'Clicking launch will apply the parameters to the asteroid and launch it.
+
+
+    After
+    10 seconds have passed Psyche will reset back to a default point reguardless
+    on whether or not a collison occured . If any particles were knocked off of Psyche
+    they will not reset with Psyche.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1539,7 +1561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.5114, y: -172.15578}
+  m_AnchoredPosition: {x: 2, y: -171}
   m_SizeDelta: {x: 713.3347, y: 68.5223}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &963792172
@@ -1562,8 +1584,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: First, press the "launch an Asteroid to start the game. To go back to the
-    main menu press the pause icon on the top left cornor.
+  m_text: First, press the "Launch an Asteroid" to begin entering parameters for
+    the Asteroid. To return to the main menu press the pause icon on the top left
+    cornor and select the exit button.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1947,7 +1970,15 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Repeat 1-5 untill you get desired Psyche and hit Evaluate Psyche
+  m_text: 'Repeat the previous steps until you believe Psyche is ready to be evaluated.
+    Click "Evaluate Psyche" to recieve your score and see if you won the game.
+
+
+    You
+    can NOT continue launching asteroids at Psyche once you click evaluate so be
+    careful not to click the button early.
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2436,7 +2467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0025024, y: -200}
+  m_AnchoredPosition: {x: -459, y: 212}
   m_SizeDelta: {x: 160, y: 52.1059}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1579463058
@@ -2657,8 +2688,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0013122559, y: 0.00022888184}
-  m_SizeDelta: {x: -0.6500244, y: -0.7799988}
+  m_AnchoredPosition: {x: 0.16314697, y: -61.3826}
+  m_SizeDelta: {x: 99.273, y: 121.9855}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1677130759
 MonoBehaviour:
@@ -2735,7 +2766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -438.36, y: -200}
+  m_AnchoredPosition: {x: -462, y: -200}
   m_SizeDelta: {x: -876.7179, y: -295.09668}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1904839985
