@@ -86,9 +86,10 @@ public class ParticleCounter : MonoBehaviour
             GameObject g = (GameObject)o;
             PsycheParticleCounter script = g.GetComponent<PsycheParticleCounter>();
 
-            if (g.tag == "MetalCore_Particle" || g.tag == "OA_MetalCore_Particle" && script.partOfPsyche == true)
+            if ((g.tag == "MetalCore_Particle" || g.tag == "OA_MetalCore_Particle") && script.partOfPsyche == true)
             {
                 //PsycheParticles.Add(g);
+                Debug.Log("Adding Particle");
                 if(g.tag == "OA_MetalCore_Particle")
                 {
                     particles.Add(g);
@@ -96,7 +97,7 @@ public class ParticleCounter : MonoBehaviour
                 metal_particle_count++;
             }
 
-            else if (g.tag == "Mantle_Particle" || g.tag == "OA_Mantle_Particle" && script.partOfPsyche == true)
+            else if ((g.tag == "Mantle_Particle" || g.tag == "OA_Mantle_Particle") && script.partOfPsyche == true)
             {
                 //PsycheParticles.Add(g);
                 if (g.tag == "OA_Mantle_Particle")
@@ -106,7 +107,7 @@ public class ParticleCounter : MonoBehaviour
                 mantle_particle_count++;
             }
 
-            else if (g.tag == "Crust_Particle" || g.tag == "OA_Crust_Particle" && script.partOfPsyche == true)
+            else if ((g.tag == "Crust_Particle" || g.tag == "OA_Crust_Particle") && script.partOfPsyche == true)
             {
                 //PsycheParticles.Add(g);
                 if (g.tag == "OA_Crust_Particle")
@@ -115,12 +116,45 @@ public class ParticleCounter : MonoBehaviour
                 }
                 crust_particle_count++;
             }
-            else
+            //
+            else if(g.tag == "Crust_Particle" && script.partOfPsyche == false)
+            {
+                Debug.Log("Deleteing");
+                particles.Remove(g);
+                Destroy(g);
+            }
+            else if (g.tag == "Mantle_Particle" && script.partOfPsyche == false)
+            {
+                Debug.Log("Deleteing");
+                particles.Remove(g);
+                Destroy(g);
+            }
+            else if (g.tag == "MetalCore_Particle" && script.partOfPsyche == false)
+            {
+                Debug.Log("Deleteing");
+                particles.Remove(g);
+                Destroy(g);
+            }
+
+            /*else
             {
                 particles.Remove(g);
             }
+            */
         }
     }
+
+   /* void deleteParticle(GameObject particle)
+    {
+        PsycheParticleCounter script = particle.GetComponent<PsycheParticleCounter>();
+        if ((particle.tag == "Crust_Particle" || particle.tag == "OA_Crust_Particle") && script.partOfPsyche == false)
+        {
+            particles.Remove(particle);
+            RemoveParticleCount(particle);
+            Destroy(particle);
+        }
+    }
+   */
 
     void RemoveParticleCount(GameObject particle)
     {
