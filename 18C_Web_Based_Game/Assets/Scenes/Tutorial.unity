@@ -313,7 +313,7 @@ MonoBehaviour:
 
     The material changes
     the properites of the asteroid and can be used to make the ratio of metal to
-    other partical types better.
+    other particle types better.
 
 
     The position button allows you to choose from
@@ -1585,7 +1585,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: First, press the "Launch an Asteroid" to begin entering parameters for
-    the Asteroid. To return to the main menu press the pause icon on the top left
+    the asteroid. To return to the main menu press the pause icon on the top left
     cornor and select the exit button.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
