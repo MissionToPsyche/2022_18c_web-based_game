@@ -35,6 +35,19 @@ public class AfterLaunchTimer : MonoBehaviour
         //Call the countWhatParticlesArePartOfPsyche() method in ParticleCounter
         GameObject particleCounter = GameObject.Find("ParticleCounter");
         particleCounter.GetComponent<ParticleCounter>().countWhatParticlesArePartOfPsyche();
+        Debug.Log("After counting");
+
+        /*
+        //Remove particles from system that aren't part of Psyche
+        GameObject ParticleCount = GameObject.Find("ParticleCounter");
+        ParticleCounter script3 = ParticleCount.GetComponent<ParticleCounter>();
+        particles = script3.particles;
+
+        foreach (GameObject obj in particles)
+        {
+            ParticleCount.deleteParticle(obj);
+        }
+        */
 
         //Set all the particles velocities to zero
         GameObject counter = GameObject.Find("ParticleCounter");
