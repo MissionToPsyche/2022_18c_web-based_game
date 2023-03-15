@@ -7,12 +7,24 @@ using TMPro;
 
 public class UserInputToAsteroid : MonoBehaviour
 {
+
+
+    // public const int initialMass = 99;
+    // public const int initialMantleMass = 33;
+    // public const int initialCrustMass = 33;
+    // public const int initialMetalMass = 33;
+
+    // public GameObject particleCounter;
+
+    public const int DESIREDMASS = 500;
+
     public bool ClickedButton = false;
 
     public int massInput;
     public int velocityInput;
     public int angleInput;
     public string materialInput;
+
 
     public TextMeshProUGUI scoreValue;
 
@@ -113,12 +125,71 @@ public class UserInputToAsteroid : MonoBehaviour
     }
 
     // Total Score is updated when 'Evaluate Psyche' button is Clicked
+
+
+    // total Score calculated by:
+    //   Metal to Mantle to Crust Ratio +
+    //   Total Mass of Psyche compared to actual mass
     public void HandleEvaluateClick()
     {
       Debug.Log("Evaluate Clicked");
       scoreValue = GameObject.Find("Canvas - HUD/HUD Parent/CurScore").GetComponent<TMPro.TextMeshProUGUI>();
       scoreValue.text = massInput.ToString();
       Debug.Log("Score Set");
+
+      Debug.Log("MATERIAL CHOSEN WAS: " + materialInput);
+
+      //Enable the timer contained in the AfterLaunchTimer.cs script
+      ParticleCounter pScript = GameObject.Find("ParticleCounter").GetComponent<ParticleCounter>();
+      pScript.enabled = true;
+
+      Debug.Log("PARTICLE COUNT (crust, metal, mantle): " + pScript.getCrust_Particle_Count() + " " + pScript.getMetal_Particle_Count() + " " + pScript.getMantle_Particle_Count());
+
+      // get total num of Particles.
+      // multiple metal by 3 and mantle by 2 because that is their masses
+      int adjustedMetalCount = pScript.getMetal_Particle_Count()*3;
+      int adjustedMantleCount = pScript.getMantle_Particle_Count()*2;
+      int crustCount = pScript.getCrust_Particle_Count();
+
+      int totalParticleCount = pScript.getCrust_Particle_Count() + adjustedMetalCount + adjustedMantleCount;
+      Debug.Log("TOTAL PARTICLE COUNT: " + totalParticleCount);
+
+
+      // get metal Ratio
+      float metalRatio = (float)adjustedMetalCount/(float)totalParticleCount;
+      Debug.Log("METAL RATIO " + metalRatio);
+      // get mantle Ratio
+      float mantleRatio = (float)adjustedMantleCount/(float)totalParticleCount;
+      Debug.Log("MANTLE RATIO: " + mantleRatio);
+      // get crust ratio
+      float crustRatio = (float)crustCount/(float)totalParticleCount;
+      Debug.Log("CRUST RATIO: " + crustRatio);
+
+      Debug.Log("TOTAL MASS: " + totalParticleCount);
+
+
+      // check metal to mantle to crust ratio
+      // TODO: determine ratio to compare it to?
+      // we know metal is between 30-60 %
+      float scoreOne = 0;
+      if(metalRatio <= 0.60 && metalRatio >= 0.30)
+      {
+        scoreOne = 50;
+      }
+      else
+      {
+        scoreOne = 0;
+      }
+
+      // check total mass and develop the score based on it
+      float ratio = (float)totalParticleCount/(float)DESIREDMASS;
+      Debug.Log("SCORE: " + ratio/2);
+      float scoreTwo = (ratio/2) * 100;
+
+      float totalScore = scoreOne + scoreTwo;
+
+      Debug.Log("TOTAL SCORE: " + (scoreOne + scoreTwo));
+      scoreValue.text = totalScore.ToString();
     }
 
     private LineRenderer lineRenderer;
