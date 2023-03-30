@@ -7,6 +7,18 @@ using TMPro;
 
 public class UserInputToAsteroid : MonoBehaviour
 {
+    // following variables will be stored for calculating the score
+    public const int DESIREDMASS = 500;
+
+    public static float totalMass = 254;
+
+    public static float metalMass = 90;
+
+    public static float mantleMass = 124;
+
+    public static float crustMass = 40;
+    // end ----------------------------------^
+
     public bool ClickedButton = false;
 
     public int massInput;
@@ -14,6 +26,8 @@ public class UserInputToAsteroid : MonoBehaviour
     public int angleInput;
     public string materialInput;
     
+    public TextMeshProUGUI scoreValue;
+
     public TMP_InputField massInputField;
     public TMP_InputField velocityInputField;
     public TMP_InputField angleInputField;
@@ -108,6 +122,120 @@ public class UserInputToAsteroid : MonoBehaviour
             }
         }
 
+    }
+
+    // Total Score is updated when 'Evaluate Psyche' button is Clicked
+    // total Score calculated by:
+    //   Metal to Mantle to Crust Ratio +
+    //   Total Mass of Psyche compared to actual mass
+    public void HandleEvaluateClick()
+    {
+        // // Debug.Log("Evaluate Clicked");
+        /*scoreValue =
+            GameObject
+                .Find("Canvas - HUD/HUD Parent/CurScore")
+                .GetComponent<TMPro.TextMeshProUGUI>();
+        */
+        scoreValue.text = massInput.ToString();
+
+
+        ParticleCounter pScript =
+            GameObject.Find("ParticleCounter").GetComponent<ParticleCounter>();
+        pScript.enabled = true;
+
+
+        totalMass += massInput;
+
+        // See what material was entered. Then add mass of material + initial mass of material DIV BY total mass to find the ratio
+        if (materialInput == "Metal")
+        {
+            metalMass += massInput;
+            Debug.Log("METAL MASS: " + metalMass);
+        }
+        else if (materialInput == "Mantle")
+        {
+            mantleMass += massInput;
+            Debug.Log("MANTLE MASS: " + mantleMass);
+        }
+        else
+        {
+            // Crust
+            crustMass += massInput;
+            Debug.Log("CRUST MASS: " + crustMass);
+        }
+        // get metal Ratio
+        float metalRatio = (float)metalMass / (float)totalMass;
+
+        // get mantle Ratio
+        float mantleRatio = (float)mantleMass / (float)totalMass;
+
+        // get crust ratio
+        float crustRatio = (float)crustMass / (float)totalMass;
+
+
+        Debug.Log("MASS INPUT: " + massInput);
+
+        Debug.Log("TOTAL MASS: " + totalMass);
+
+        float metalScore = 0;
+        float mantleScore = 0;
+        float crustScore = 0;
+
+        // IF metal ratio in this range, full metal ratio points, else 0 points
+        if (metalRatio <= 0.60 && metalRatio >= 0.30)
+        {
+            metalScore = 17;
+        }
+        else
+        {
+            metalScore = 0;
+        }
+
+        // IF crust ratio in this range, full crust ratio points, else 0 points
+        if (crustRatio <= 0.10 && crustRatio >= 0.05)
+        {
+            crustScore = 17;
+        }
+        else
+        {
+            crustScore = 0;
+        }
+        // IF mantle ratio is in this range, full mantle ratio points, else 0 points
+        if (mantleRatio <= 0.30 && mantleRatio >= 0.20)
+        {
+            mantleScore = 16;
+        }
+        else
+        {
+            mantleScore = 0;
+        }
+
+        // check total mass and develop the score based on it
+        // check which is higher, make that the denominator to develop the score
+        float scoreTwo = 0;
+        float ratio = 0;
+        if (totalMass < DESIREDMASS)
+        {
+            ratio = (float)totalMass / (float)DESIREDMASS;
+            scoreTwo = (ratio / 2) * 100;
+        }
+        else
+        {
+            ratio = (float)DESIREDMASS / (float)totalMass;
+            scoreTwo = (ratio / 2) * 100;
+        }
+
+        Debug.Log("METAL SCORE: " + metalScore);
+        Debug.Log("CRUST SCORE: " + crustScore);
+        Debug.Log("MANTLE SCORE: " + mantleScore);
+        Debug.Log("MASS ACCURACY SCORE: " + scoreTwo);
+
+        float totalScore = metalScore + crustScore + mantleScore + scoreTwo;
+
+        Debug
+            .Log("TOTAL SCORE: " +
+            (metalScore + crustScore + mantleScore + scoreTwo));
+        scoreValue.text = totalScore.ToString();
     }
 
     private LineRenderer lineRenderer;
