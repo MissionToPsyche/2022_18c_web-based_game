@@ -16435,6 +16435,7 @@ GameObject:
   - component: {fileID: 1713882439}
   - component: {fileID: 1713882438}
   - component: {fileID: 1713882437}
+  - component: {fileID: 1713882440}
   m_Layer: 5
   m_Name: Launch Button
   m_TagString: Untagged
@@ -16519,10 +16520,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1020533967}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1713882440}
+        m_TargetAssemblyTypeName: UI_Hidding, Assembly-CSharp
+        m_MethodName: HideParameterUI
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16569,6 +16570,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713882435}
   m_CullTransparentMesh: 1
+--- !u!114 &1713882440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713882435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 893c20041e6e50c458f6043556f8e482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1719318262 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7002474952745825391, guid: 0241b8bf660c88d40aaa5b25996f2f7f, type: 3}
