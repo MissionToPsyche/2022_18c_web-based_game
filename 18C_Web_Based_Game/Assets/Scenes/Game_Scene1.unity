@@ -4020,7 +4020,7 @@ MonoBehaviour:
   velocityInput: 0
   angleInput: 0
   materialInput: 
-  scoreValue: {fileID: 0}
+  scoreValue: {fileID: 562105170}
   massInputField: {fileID: 399553198}
   velocityInputField: {fileID: 1526296435}
   angleInputField: {fileID: 1436272045}
