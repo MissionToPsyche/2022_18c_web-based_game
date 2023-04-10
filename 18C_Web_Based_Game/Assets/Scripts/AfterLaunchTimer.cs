@@ -91,6 +91,10 @@ public class AfterLaunchTimer : MonoBehaviour
         GameObject oldOtherAsteroid;
         oldOtherAsteroid = GameObject.Find("/Other Asteroid/OtherAsteroid");
         oldOtherAsteroid.name = "oldOtherAsteroid";
+        
+        //
+        string oldTag = oldOtherAsteroid.tag;
+
         if (oldOtherAsteroid.tag == "OA_MetalCore_Particle")
         {
             oldOtherAsteroid.tag = "MetalCore_Particle";
@@ -113,6 +117,10 @@ public class AfterLaunchTimer : MonoBehaviour
         //newPosition = newPosition + centerParticleLocation;
         GameObject OtherAsteroid = Instantiate(oldOtherAsteroid, newPosition, oldOtherAsteroid.transform.rotation);
         OtherAsteroid.name = "OtherAsteroid";
+        
+        //
+        OtherAsteroid.tag = oldTag;
+        
         OtherAsteroid.transform.position = newPosition;
 
         AfterLaunchTimer timerScript = OtherAsteroid.GetComponent<AfterLaunchTimer>();

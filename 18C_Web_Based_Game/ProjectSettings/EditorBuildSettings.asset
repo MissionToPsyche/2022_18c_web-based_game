@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Disclaimer.unity
     guid: 97f6885849f824e199b97b7d2ae1c42a
+  - enabled: 1
+    path: Assets/Scenes/Win_Screen.unity
+    guid: 058b4616ca86a8a48939b3326643c33a
   m_configObjects: {}
