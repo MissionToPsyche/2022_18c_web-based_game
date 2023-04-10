@@ -20650,6 +20650,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OtherAsteroid
       objectReference: {fileID: 0}
+    - target: {fileID: 3917038934308013173, guid: 89f3153e7376fd8459ec8deb33e37353, type: 3}
+      propertyPath: m_TagString
+      value: OA_MetalCore_Particle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89f3153e7376fd8459ec8deb33e37353, type: 3}
 --- !u!4 &4981772573419048161 stripped
