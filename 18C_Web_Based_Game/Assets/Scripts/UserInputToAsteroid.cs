@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 using TMPro;
 
@@ -138,6 +139,177 @@ public class UserInputToAsteroid : MonoBehaviour
                 .Find("Canvas - HUD/HUD Parent/CurScore")
                 .GetComponent<TMPro.TextMeshProUGUI>();
         */
+
+        //Used to hold the scores for each
+        double totalScore = 0;
+        double massScore = 0;
+        double numberOfNonMetalScore = 0;
+
+        //ParticleCounter contains the list of particles that are part of Psyche
+        ParticleCounter counterScript =
+                        GameObject.Find("ParticleCounter").GetComponent<ParticleCounter>();
+
+        List<GameObject> particleList = counterScript.particles;
+
+        //Used to store the mass and particle counts
+        float massOfMetalParticles = 0;
+        int numOfMetalParticles = 0;
+
+        float massOfMantleParticles = 0;
+        int numOfMantleParticles = 0;
+
+        float massOfCrustParticles = 0;
+        int numOfCrustParticles = 0;
+
+        foreach(GameObject obj in particleList)
+        {
+            //determine the mass of each particle type
+            // also determine the count of each particle
+            if(obj.tag == "MetalCore_Particle")
+            {
+                Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
+                massOfMetalParticles = massOfMetalParticles + rigidbody.mass;
+                numOfMetalParticles++;
+            }
+            if(obj.tag == "Mantle_Particle")
+            {
+                Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
+                massOfMantleParticles = massOfMantleParticles + rigidbody.mass;
+                numOfMantleParticles++;
+            }
+            if(obj.tag == "Crust_Particle")
+            {
+                Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
+                massOfCrustParticles = massOfCrustParticles + rigidbody.mass;
+                numOfCrustParticles++;
+            }
+        }
+
+        Debug.Log("Metal: " + massOfMetalParticles + ", Mantle: " + massOfMantleParticles + " Crust: " + massOfCrustParticles);
+        Debug.Log("Metal particles: " + numOfMetalParticles + ", Mantle particles: " + numOfMantleParticles + " Crust particles: " + numOfCrustParticles);
+
+        //Calculate score based on overall mass of Psyche
+        // Psyche has an total estimated mass of 2.7 x 10^19 kg
+        // 90 (metal mass units) + 124 (mantle mass units) + 40 (crust mass units) = 254 mass units by default
+        // The game plays better if players can launch asteroids at Psyche that have high mass (more mass and velocicy = larger impact)
+        // Lets make the target 350 mass units.
+        // 27000000000000000000 kg / 350 = 7.7 x 10^16 kg per mass unit in game
+        float totalMass = massOfMetalParticles + massOfMantleParticles + massOfCrustParticles;
+        bool needsMoreMass = false; //Used to give feedback on the win/lose page
+        bool tooManyNonMetal = false; //Used to give feedback on the win/lose page
+
+        //Best possible mass score
+        if(totalMass >= 330 && totalMass <=370)
+        {
+            massScore = 50;
+        }
+
+        //2nd best mass score
+        if(totalMass >= 310 && totalMass <330)
+        {
+            massScore = 40;
+            needsMoreMass = true;
+        }
+        if(totalMass <= 390 && totalMass > 370)
+        {
+            massScore = 40;
+            needsMoreMass = false;
+        }
+
+        //3rd best mass score
+        if (totalMass >= 290 && totalMass < 310)
+        {
+            massScore = 30;
+            needsMoreMass = true;
+        }
+        if (totalMass <= 410 && totalMass > 390)
+        {
+            massScore = 30;
+            needsMoreMass = false;
+        }
+
+        //4th best mass score
+        if (totalMass >= 270 && totalMass < 290)
+        {
+            massScore = 20;
+            needsMoreMass = true;
+        }
+        if (totalMass <= 430 && totalMass > 410)
+        {
+            massScore = 20;
+            needsMoreMass = false;
+        }
+
+        //5th mass score bracket
+        if (totalMass >= 250 && totalMass < 270)
+        {
+            massScore = 10;
+            needsMoreMass = true;
+        }
+        if (totalMass <= 450 && totalMass > 430)
+        {
+            massScore = 10;
+            needsMoreMass = false;
+        }
+
+        //final mass score bracket
+        if (totalMass < 250)
+        {
+            massScore = 0;
+            needsMoreMass = true;
+        }
+        if (totalMass > 450)
+        {
+            massScore = 0;
+            needsMoreMass = false;
+        }
+
+        //Calculate score based on how many non-metal particles remain
+        int totalNumNonMetal = numOfCrustParticles + numOfMantleParticles;
+        if(totalNumNonMetal >= 0 && totalNumNonMetal < 5)
+        {
+            numberOfNonMetalScore = 50;
+            tooManyNonMetal = false;
+        }
+
+        if(totalNumNonMetal >= 5 && totalNumNonMetal < 10)
+        {
+            numberOfNonMetalScore = 40;
+            tooManyNonMetal = true;
+        }
+
+        if (totalNumNonMetal >= 10 && totalNumNonMetal < 15)
+        {
+            numberOfNonMetalScore = 30;
+            tooManyNonMetal = true;
+        }
+
+        if (totalNumNonMetal >= 15 && totalNumNonMetal < 25)
+        {
+            numberOfNonMetalScore = 20;
+            tooManyNonMetal = true;
+        }
+
+        if (totalNumNonMetal >= 25 && totalNumNonMetal < 40)
+        {
+            numberOfNonMetalScore = 10;
+            tooManyNonMetal = true;
+        }
+
+        if (totalNumNonMetal >= 40)
+        {
+            numberOfNonMetalScore = 0;
+            tooManyNonMetal = true;
+        }
+
+        totalScore = massScore + numberOfNonMetalScore;
+        scoreValue.text = totalScore.ToString();
+
+        string inputForWinPage;
+        inputForWinPage = totalScore.ToString() + "," + needsMoreMass.ToString() + "," + tooManyNonMetal.ToString();
+
+        Debug.Log("Mass score = " + massScore + ", NonMetalScore = " + numberOfNonMetalScore);
+        /*
         scoreValue.text = massInput.ToString();
 
 
@@ -238,6 +410,184 @@ public class UserInputToAsteroid : MonoBehaviour
             .Log("TOTAL SCORE: " +
             (metalScore + crustScore + mantleScore + scoreTwo));
         scoreValue.text = totalScore.ToString();
+        */
+    }
+
+    public void getResults()
+    {
+        double totalScore = 0;
+        double massScore = 0;
+        double numberOfNonMetalScore = 0;
+
+        //ParticleCounter contains the list of particles that are part of Psyche
+        ParticleCounter counterScript =
+                        GameObject.Find("ParticleCounter").GetComponent<ParticleCounter>();
+
+        List<GameObject> particleList = counterScript.particles;
+
+        //Used to store the mass and particle counts
+        float massOfMetalParticles = 0;
+        int numOfMetalParticles = 0;
+
+        float massOfMantleParticles = 0;
+        int numOfMantleParticles = 0;
+
+        float massOfCrustParticles = 0;
+        int numOfCrustParticles = 0;
+
+        foreach (GameObject obj in particleList)
+        {
+            //determine the mass of each particle type
+            // also determine the count of each particle
+            if (obj.tag == "MetalCore_Particle")
+            {
+                Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
+                massOfMetalParticles = massOfMetalParticles + rigidbody.mass;
+                numOfMetalParticles++;
+            }
+            if (obj.tag == "Mantle_Particle")
+            {
+                Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
+                massOfMantleParticles = massOfMantleParticles + rigidbody.mass;
+                numOfMantleParticles++;
+            }
+            if (obj.tag == "Crust_Particle")
+            {
+                Rigidbody2D rigidbody = obj.GetComponent<Rigidbody2D>();
+                massOfCrustParticles = massOfCrustParticles + rigidbody.mass;
+                numOfCrustParticles++;
+            }
+        }
+
+        Debug.Log("Metal: " + massOfMetalParticles + ", Mantle: " + massOfMantleParticles + " Crust: " + massOfCrustParticles);
+        Debug.Log("Metal particles: " + numOfMetalParticles + ", Mantle particles: " + numOfMantleParticles + " Crust particles: " + numOfCrustParticles);
+
+        //Calculate score based on overall mass of Psyche
+        // Psyche has an total estimated mass of 2.7 x 10^19 kg
+        // 90 (metal mass units) + 124 (mantle mass units) + 40 (crust mass units) = 254 mass units by default
+        // The game plays better if players can launch asteroids at Psyche that have high mass (more mass and velocicy = larger impact)
+        // Lets make the target 350 mass units.
+        // 27000000000000000000 kg / 350 = 7.7 x 10^16 kg per mass unit in game
+        float totalMass = massOfMetalParticles + massOfMantleParticles + massOfCrustParticles;
+        bool needsMoreMass = false; //Used to give feedback on the win/lose page
+        bool tooManyNonMetal = false; //Used to give feedback on the win/lose page
+
+        //Best possible mass score
+        if (totalMass >= 330 && totalMass <= 370)
+        {
+            massScore = 50;
+        }
+
+        //2nd best mass score
+        if (totalMass >= 310 && totalMass < 330)
+        {
+            massScore = 40;
+            needsMoreMass = true;
+        }
+        if (totalMass <= 390 && totalMass > 370)
+        {
+            massScore = 40;
+            needsMoreMass = false;
+        }
+
+        //3rd best mass score
+        if (totalMass >= 290 && totalMass < 310)
+        {
+            massScore = 30;
+            needsMoreMass = true;
+        }
+        if (totalMass <= 410 && totalMass > 390)
+        {
+            massScore = 30;
+            needsMoreMass = false;
+        }
+
+        //4th best mass score
+        if (totalMass >= 270 && totalMass < 290)
+        {
+            massScore = 20;
+            needsMoreMass = true;
+        }
+        if (totalMass <= 430 && totalMass > 410)
+        {
+            massScore = 20;
+            needsMoreMass = false;
+        }
+
+        //5th mass score bracket
+        if (totalMass >= 250 && totalMass < 270)
+        {
+            massScore = 10;
+            needsMoreMass = true;
+        }
+        if (totalMass <= 450 && totalMass > 430)
+        {
+            massScore = 10;
+            needsMoreMass = false;
+        }
+
+        //final mass score bracket
+        if (totalMass < 250)
+        {
+            massScore = 0;
+            needsMoreMass = true;
+        }
+        if (totalMass > 450)
+        {
+            massScore = 0;
+            needsMoreMass = false;
+        }
+
+        //Calculate score based on how many non-metal particles remain
+        int totalNumNonMetal = numOfCrustParticles + numOfMantleParticles;
+        if (totalNumNonMetal >= 0 && totalNumNonMetal < 5)
+        {
+            numberOfNonMetalScore = 50;
+            tooManyNonMetal = false;
+        }
+
+        if (totalNumNonMetal >= 5 && totalNumNonMetal < 10)
+        {
+            numberOfNonMetalScore = 40;
+            tooManyNonMetal = true;
+        }
+
+        if (totalNumNonMetal >= 10 && totalNumNonMetal < 15)
+        {
+            numberOfNonMetalScore = 30;
+            tooManyNonMetal = true;
+        }
+
+        if (totalNumNonMetal >= 15 && totalNumNonMetal < 25)
+        {
+            numberOfNonMetalScore = 20;
+            tooManyNonMetal = true;
+        }
+
+        if (totalNumNonMetal >= 25 && totalNumNonMetal < 40)
+        {
+            numberOfNonMetalScore = 10;
+            tooManyNonMetal = true;
+        }
+
+        if (totalNumNonMetal >= 40)
+        {
+            numberOfNonMetalScore = 0;
+            tooManyNonMetal = true;
+        }
+
+        totalScore = massScore + numberOfNonMetalScore;
+        scoreValue.text = totalScore.ToString();
+
+        string inputForWinPage;
+        //inputForWinPage = totalScore.ToString() + "," + needsMoreMass.ToString() + "," + tooManyNonMetal.ToString();
+        //Debug.Log(inputForWinPage);
+
+        ScoringController.totalScore_static = totalScore;
+        ScoringController.needsAdditionalMass_static = needsMoreMass;
+        ScoringController.tooManyNonMetalParticles_static = tooManyNonMetal;
+
+        SceneManager.LoadScene("Win_Screen");
     }
 
     private LineRenderer lineRenderer;
