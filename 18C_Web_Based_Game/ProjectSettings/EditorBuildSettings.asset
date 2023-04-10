@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/UI Buttons.unity
     guid: ef74fe1922a497449a98d3cf43b9fe08
+  - enabled: 1
+    path: Assets/Scenes/Disclaimer.unity
+    guid: 97f6885849f824e199b97b7d2ae1c42a
   m_configObjects: {}
