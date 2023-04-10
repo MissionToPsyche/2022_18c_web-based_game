@@ -66,6 +66,8 @@ public class UserInputToAsteroid : MonoBehaviour
 
             if (preventApplicationofParameter == false)
             {
+                //Code moved to MaterialInputApplier() 
+                /*
                 //Handle the user material input
                 otherAsteroidRenderer = otherAsteroid.GetComponent<Renderer>();
 
@@ -91,7 +93,7 @@ public class UserInputToAsteroid : MonoBehaviour
                     otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
                 }
                 else { materialInput = "Something went wrong (materialInput)"; }
-
+                */
                 Debug.Log("mass: " + massInput + " velocity: " + velocityInput +
                           " angle: " + angleInput + " material: " + materialInput);
 
@@ -284,7 +286,43 @@ public class UserInputToAsteroid : MonoBehaviour
         if(val >= 0 && val <= 2)
         {
             materialSelected = val;
+            MaterialInputApplier(val);
         }
+    }
+
+    //This method is called when the play selects a drop-down option for material
+    //  It sets the otherAsteroid to the appropriate particle type
+    public void MaterialInputApplier(int val)
+    {
+        //Handle the user material input
+        SpriteRenderer renderer = otherAsteroid.GetComponent<SpriteRenderer>();
+
+        if (val == 0)
+        {
+            materialInput = "Metal";
+            otherAsteroid.tag = "OA_MetalCore_Particle";
+            renderer.color = new Color(0.8588236f, 0.3686275f, 0f, 1f);
+            //otherAsteroidColor = new Color(0.8588236f, 0.3686275f, 0f, 1f);
+            //otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
+        }
+        
+        else if (val == 1)
+        {
+            materialInput = "Mantle";
+            otherAsteroid.tag = "OA_Mantle_Particle";
+            renderer.color = new Color(0.5566f, 0.2389f, 0f, 1f);
+            //otherAsteroidColor = new Color(0.5566f, 0.2389f, 0f, 1f);
+            // otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
+        }
+        else if (val == 2)
+        {
+            materialInput = "Crust";
+            otherAsteroid.tag = "OA_Crust_Particle";
+            renderer.color = new Color(0.3113f, 0.1344f, 0.0011f, 1f);
+            //otherAsteroidColor = new Color(0.3113f, 0.1344f, 0.0011f, 1f);
+            //otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
+        }
+        else { materialInput = "Something went wrong (materialInput)"; }
     }
 
     //This method is called when the player selects a drop-down option for Location.
