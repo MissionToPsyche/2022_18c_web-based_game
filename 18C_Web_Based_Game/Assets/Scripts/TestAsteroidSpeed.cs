@@ -23,11 +23,13 @@ public class TestAsteroidSpeed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         //Set the velocity of the OtherAsteroid to the speed upon pressing space
         if(Input.GetKeyDown("space"))
         {
             rb.velocity = transform.right * speed;
         }
+        */
     }
 
     //Used to control what happens after a collision occurs for OtherAsteroid
