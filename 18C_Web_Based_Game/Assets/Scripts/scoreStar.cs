@@ -11,6 +11,9 @@ public class scoreStar : MonoBehaviour
     
     public TMP_Text scorePoints;
     public TMP_Text massFeedback;
+    public TMP_Text currentMass;
+    public TMP_Text massScore;
+    public TMP_Text makeUpScore;
     public TMP_Text otherParticleFeedback;
     public TMP_Text starCongrats;
 
@@ -19,38 +22,25 @@ public class scoreStar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //points = Random.Range(1, 1000);
-        //numberofStars = Random.Range(1, 3);
-        //star1.SetActive(false);
-        //star2.SetActive(false);
-        //star3.SetActive(false);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //scorePoints.text=points.ToString();
-
-        //90+ score = 3 stars
-        //50+ score = 2 stars
-        //<50 score = 1 star
+        Debug.Log("scoring toomanymetal:" + ScoringController.tooManyNonMetalParticles_static);
+        Debug.Log("Mass bool:" + ScoringController.needsAdditionalMass_static);
 
         double totalScore = ScoringController.totalScore_static;
         bool needsAdditionalMass = ScoringController.needsAdditionalMass_static;
         bool tooManyNonMetalParticles = ScoringController.tooManyNonMetalParticles_static;
 
         Debug.Log("Recieved score: " + totalScore);
-        if(totalScore >= 90)
+        if (totalScore >= 90)
         {
             numberofStars = 3;
         }
-
-        if(totalScore < 90 && totalScore >= 50)
+        else if (totalScore < 90 && totalScore >= 50)
         {
             numberofStars = 2;
         }
 
-        if(totalScore < 50 && totalScore >= 25)
+        else if (totalScore < 50 && totalScore >= 25)
         {
             numberofStars = 1;
         }
@@ -79,7 +69,7 @@ public class scoreStar : MonoBehaviour
             star1.SetActive(true);
             star2.SetActive(true);
             star3.SetActive(true);
-            starCongrats.text = "You recieved 3 stars";
+            starCongrats.text = "You recieved 3 stars!";
         }
         else
         {
@@ -88,23 +78,35 @@ public class scoreStar : MonoBehaviour
             star3.SetActive(false);
             starCongrats.text = "You recieved 0 stars. Try Agian!";
         }
-
-        if(needsAdditionalMass == true)
+        if (ScoringController.correctMass_static == true)
+        {
+            massFeedback.text = "Congrats! the Psyche you created falls within the acceptable mass range!";
+        }
+        else if (needsAdditionalMass == true)
         {
             massFeedback.text = "The Psyche you created doesn't have enough mass. Increasing the mass will award you a higher score.";
         }
-        if(massFeedback == false)
+        else if (needsAdditionalMass == false)
         {
-            massFeedback.text = "The mass of the Psyche you created is very close to the real world Psyche. You get full points for the mass aspect of the score!";
+            massFeedback.text = "The mass of Psyche you created is too large. Try to reduce the mass for a better score.";
         }
 
-        if(tooManyNonMetalParticles == true)
+        if (tooManyNonMetalParticles == true)
         {
             otherParticleFeedback.text = "Try to remove additional mantle/crust particles to get a better score";
         }
-        if(massFeedback == false)
+        else if (tooManyNonMetalParticles == false)
         {
             otherParticleFeedback.text = "The Psyche you created is made almost entirely of metal. You get full points!";
         }
+
+        //Display the current mass of the user-created Psyche
+        currentMass.text = "Psyche's Mass: " + ScoringController.totalMass_static + " units";
+
+        //Display the mass score
+        massScore.text = "Mass Score: " + ScoringController.massScore_static;
+
+        //Display the MakeUp Score
+        makeUpScore.text = "Make-Up Score: " + ScoringController.MakeUpScore_static;
     }
 }
