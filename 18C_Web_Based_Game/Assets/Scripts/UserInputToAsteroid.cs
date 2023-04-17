@@ -191,74 +191,75 @@ public class UserInputToAsteroid : MonoBehaviour
         //Calculate score based on overall mass of Psyche
         // Psyche has an total estimated mass of 2.7 x 10^19 kg
         // 90 (metal mass units) + 124 (mantle mass units) + 40 (crust mass units) = 254 mass units by default
-        // The game plays better if players can launch asteroids at Psyche that have high mass (more mass and velocicy = larger impact)
-        // Lets make the target 350 mass units.
+        // Since Psyche formed by hit-and-run collisions we need to score based on having mass knocked off
+        // Lets make the target 100 mass units.
         // 27000000000000000000 kg / 350 = 7.7 x 10^16 kg per mass unit in game
         float totalMass = massOfMetalParticles + massOfMantleParticles + massOfCrustParticles;
         bool needsMoreMass = false; //Used to give feedback on the win/lose page
         bool tooManyNonMetal = false; //Used to give feedback on the win/lose page
 
         //Best possible mass score
-        if(totalMass >= 330 && totalMass <=370)
+        if (totalMass >= 90 && totalMass <= 110)
         {
             massScore = 50;
+            ScoringController.correctMass_static = true;
         }
 
         //2nd best mass score
-        if(totalMass >= 310 && totalMass <330)
+        if (totalMass >= 80 && totalMass < 90)
         {
             massScore = 40;
             needsMoreMass = true;
         }
-        if(totalMass <= 390 && totalMass > 370)
+        if (totalMass < 120 && totalMass > 110)
         {
             massScore = 40;
             needsMoreMass = false;
         }
 
         //3rd best mass score
-        if (totalMass >= 290 && totalMass < 310)
+        if (totalMass >= 70 && totalMass < 80)
         {
             massScore = 30;
             needsMoreMass = true;
         }
-        if (totalMass <= 410 && totalMass > 390)
+        if (totalMass <= 130 && totalMass > 120)
         {
             massScore = 30;
             needsMoreMass = false;
         }
 
         //4th best mass score
-        if (totalMass >= 270 && totalMass < 290)
+        if (totalMass >= 60 && totalMass < 70)
         {
             massScore = 20;
             needsMoreMass = true;
         }
-        if (totalMass <= 430 && totalMass > 410)
+        if (totalMass <= 140 && totalMass > 130)
         {
             massScore = 20;
             needsMoreMass = false;
         }
 
         //5th mass score bracket
-        if (totalMass >= 250 && totalMass < 270)
+        if (totalMass >= 50 && totalMass < 60)
         {
             massScore = 10;
             needsMoreMass = true;
         }
-        if (totalMass <= 450 && totalMass > 430)
+        if (totalMass <= 150 && totalMass > 140)
         {
             massScore = 10;
             needsMoreMass = false;
         }
 
         //final mass score bracket
-        if (totalMass < 250)
+        if (totalMass < 50)
         {
             massScore = 0;
             needsMoreMass = true;
         }
-        if (totalMass > 450)
+        if (totalMass > 150)
         {
             massScore = 0;
             needsMoreMass = false;
@@ -266,13 +267,14 @@ public class UserInputToAsteroid : MonoBehaviour
 
         //Calculate score based on how many non-metal particles remain
         int totalNumNonMetal = numOfCrustParticles + numOfMantleParticles;
-        if(totalNumNonMetal >= 0 && totalNumNonMetal < 5)
+        Debug.Log("totalNumNonMetal:" + totalNumNonMetal);
+        if (totalNumNonMetal >= 0 && totalNumNonMetal < 5)
         {
             numberOfNonMetalScore = 50;
             tooManyNonMetal = false;
         }
 
-        if(totalNumNonMetal >= 5 && totalNumNonMetal < 10)
+        if (totalNumNonMetal >= 5 && totalNumNonMetal < 10)
         {
             numberOfNonMetalScore = 40;
             tooManyNonMetal = true;
@@ -467,72 +469,73 @@ public class UserInputToAsteroid : MonoBehaviour
         // 90 (metal mass units) + 124 (mantle mass units) + 40 (crust mass units) = 254 mass units by default
         // The game plays better if players can launch asteroids at Psyche that have high mass (more mass and velocicy = larger impact)
         // Lets make the target 350 mass units.
-        // 27000000000000000000 kg / 350 = 7.7 x 10^16 kg per mass unit in game
+        // 27000000000000000000 kg / 100 = 2.7 x 10^17 kg per mass unit in game
         float totalMass = massOfMetalParticles + massOfMantleParticles + massOfCrustParticles;
         bool needsMoreMass = false; //Used to give feedback on the win/lose page
         bool tooManyNonMetal = false; //Used to give feedback on the win/lose page
 
         //Best possible mass score
-        if (totalMass >= 330 && totalMass <= 370)
+        if (totalMass >= 90 && totalMass <= 110)
         {
             massScore = 50;
+            ScoringController.correctMass_static = true;
         }
 
         //2nd best mass score
-        if (totalMass >= 310 && totalMass < 330)
+        if (totalMass >= 80 && totalMass < 90)
         {
             massScore = 40;
             needsMoreMass = true;
         }
-        if (totalMass <= 390 && totalMass > 370)
+        if (totalMass < 120 && totalMass > 110)
         {
             massScore = 40;
             needsMoreMass = false;
         }
 
         //3rd best mass score
-        if (totalMass >= 290 && totalMass < 310)
+        if (totalMass >= 70 && totalMass < 80)
         {
             massScore = 30;
             needsMoreMass = true;
         }
-        if (totalMass <= 410 && totalMass > 390)
+        if (totalMass <= 130 && totalMass > 120)
         {
             massScore = 30;
             needsMoreMass = false;
         }
 
         //4th best mass score
-        if (totalMass >= 270 && totalMass < 290)
+        if (totalMass >= 60 && totalMass < 70)
         {
             massScore = 20;
             needsMoreMass = true;
         }
-        if (totalMass <= 430 && totalMass > 410)
+        if (totalMass <= 140 && totalMass > 130)
         {
             massScore = 20;
             needsMoreMass = false;
         }
 
         //5th mass score bracket
-        if (totalMass >= 250 && totalMass < 270)
+        if (totalMass >= 50 && totalMass < 60)
         {
             massScore = 10;
             needsMoreMass = true;
         }
-        if (totalMass <= 450 && totalMass > 430)
+        if (totalMass <= 150 && totalMass > 140)
         {
             massScore = 10;
             needsMoreMass = false;
         }
 
         //final mass score bracket
-        if (totalMass < 250)
+        if (totalMass < 50)
         {
             massScore = 0;
             needsMoreMass = true;
         }
-        if (totalMass > 450)
+        if (totalMass > 150)
         {
             massScore = 0;
             needsMoreMass = false;
@@ -540,6 +543,7 @@ public class UserInputToAsteroid : MonoBehaviour
 
         //Calculate score based on how many non-metal particles remain
         int totalNumNonMetal = numOfCrustParticles + numOfMantleParticles;
+        Debug.Log("totalNumNonMetal:" + totalNumNonMetal);
         if (totalNumNonMetal >= 0 && totalNumNonMetal < 5)
         {
             numberOfNonMetalScore = 50;
@@ -579,13 +583,14 @@ public class UserInputToAsteroid : MonoBehaviour
         totalScore = massScore + numberOfNonMetalScore;
         scoreValue.text = totalScore.ToString();
 
-        string inputForWinPage;
-        //inputForWinPage = totalScore.ToString() + "," + needsMoreMass.ToString() + "," + tooManyNonMetal.ToString();
-        //Debug.Log(inputForWinPage);
-
+        ScoringController.totalMass_static = totalMass;
         ScoringController.totalScore_static = totalScore;
+        ScoringController.massScore_static = massScore;
+        ScoringController.MakeUpScore_static = numberOfNonMetalScore;
         ScoringController.needsAdditionalMass_static = needsMoreMass;
         ScoringController.tooManyNonMetalParticles_static = tooManyNonMetal;
+
+        Debug.Log("ScoringController.tooManyNonMetal: " + ScoringController.tooManyNonMetalParticles_static);
 
         SceneManager.LoadScene("Win_Screen");
     }
