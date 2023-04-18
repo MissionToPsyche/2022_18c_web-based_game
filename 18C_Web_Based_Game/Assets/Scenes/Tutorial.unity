@@ -308,16 +308,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Select the material and posistion of asteroid.
+  m_text: 'Selecting the material changes the properites of the asteroid and can
+    be used to add aditional metal mass in the event you knocked off too many metal
+    particles.
 
 
-    The material changes
-    the properites of the asteroid and can be used to make the ratio of metal to
-    other particle types better.
+    Metal particles have a mass of 3 units, mantle particles have
+    a mass of 2 units, and crust particles have a mass of 1 units. (The asteroid
+    you make lets you set the mass).
 
 
-    The position button allows you to choose from
-    8 different locations around Psyche to have the asteroid origniate from.'
+    Selecting a position allows you to choose
+    from 8 different locations around Psyche to have the asteroid origniate from.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -344,14 +346,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -803,7 +805,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1116,9 +1118,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Input the mass, velocity, angle and material type of the asteroid. \n\nThe
-    mass has a acceptable range of 0 - 30. It will not accept anything less than
-    0 or anything greater than 30.\n\nThe velocity can be any number positive or
-    negative. "
+    mass has a acceptable range of 0 - 30 units. It will not accept anything less
+    than 0 units or anything greater than 30 units.\n\n1 mass unit = 7.7 x 10^16
+    kg.\n\nThe velocity can be any number positive or negative that falls in the
+    range of -90 to 90."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1145,14 +1148,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1258,7 +1261,7 @@ MonoBehaviour:
 
     After
     10 seconds have passed Psyche will reset back to a default point reguardless
-    on whether or not a collison occured . If any particles were knocked off of Psyche
+    on whether or not a collison occured. If any particles were knocked off of Psyche
     they will not reset with Psyche.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1293,7 +1296,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1584,9 +1587,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: First, press the "Launch an Asteroid" to begin entering parameters for
-    the asteroid. To return to the main menu press the pause icon on the top left
-    cornor and select the exit button.
+  m_text: 'The goal of this game is to try and create the Psyche asteroid as it is
+    today. To do so you will set the parameters of an asteroid and try to remove
+    mass and non-metal particles from Psyche.
+
+
+    First, press the "Launch an Asteroid"
+    to begin entering parameters for the asteroid. To return to the main menu press
+    the pause icon on the top left cornor and select the exit button.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1613,14 +1621,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1971,12 +1979,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Repeat the previous steps until you believe Psyche is ready to be evaluated.
-    Click "Evaluate Psyche" to recieve your score and see if you won the game.
+    Click "Evaluate Psyche" to recieve a score.
 
 
-    You
-    can NOT continue launching asteroids at Psyche once you click evaluate so be
-    careful not to click the button early.
+    Underneath the score a button
+    that says "Get Results" will appear. Clicking this will take you to the results
+    screen and give you additional information on why you were given the score you
+    got.
 
 '
   m_isRightToLeft: 0
@@ -2005,14 +2014,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

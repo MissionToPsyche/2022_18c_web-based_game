@@ -9,15 +9,15 @@ using TMPro;
 public class UserInputToAsteroid : MonoBehaviour
 {
     // following variables will be stored for calculating the score
-    public const int DESIREDMASS = 500;
+    //public const int DESIREDMASS = 500;
 
-    public static float totalMass = 254;
+    //public static float totalMass = 254;
 
-    public static float metalMass = 90;
+    //public static float metalMass = 90;
 
-    public static float mantleMass = 124;
+    //public static float mantleMass = 124;
 
-    public static float crustMass = 40;
+    //public static float crustMass = 40;
     // end ----------------------------------^
 
     public bool ClickedButton = false;
@@ -57,7 +57,7 @@ public class UserInputToAsteroid : MonoBehaviour
             }
 
             velocityInput = Int32.Parse(velocityInputField.text);
-            if(velocityInputField.text == "")
+            if(velocityInputField.text == "" || velocityInput > 90 || velocityInput < -90)
             {
                 velocityInputField.text = "Not Valid";
                 preventApplicationofParameter = true;
@@ -67,34 +67,6 @@ public class UserInputToAsteroid : MonoBehaviour
 
             if (preventApplicationofParameter == false)
             {
-                //Code moved to MaterialInputApplier() 
-                /*
-                //Handle the user material input
-                otherAsteroidRenderer = otherAsteroid.GetComponent<Renderer>();
-
-                if (materialSelected == 0)
-                {
-                    materialInput = "Metal";
-                    otherAsteroid.tag = "OA_MetalCore_Particle";
-                    otherAsteroidColor = new Color(0.8588f, 0.3686f, 0f, 1f);
-                    otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
-                }
-                else if (materialSelected == 1)
-                {
-                    materialInput = "Mantle";
-                    otherAsteroid.tag = "OA_Mantle_Particle";
-                    otherAsteroidColor = new Color(0.5566f, 0.2389f, 0f, 1f);
-                    otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
-                }
-                else if (materialSelected == 2)
-                {
-                    materialInput = "Crust";
-                    otherAsteroid.tag = "OA_Crust_Particle";
-                    otherAsteroidColor = new Color(0.3113f, 0.1344f, 0.0011f, 1f);
-                    otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
-                }
-                else { materialInput = "Something went wrong (materialInput)"; }
-                */
                 Debug.Log("mass: " + massInput + " velocity: " + velocityInput +
                           " angle: " + angleInput + " material: " + materialInput);
 
@@ -129,17 +101,10 @@ public class UserInputToAsteroid : MonoBehaviour
 
     // Total Score is updated when 'Evaluate Psyche' button is Clicked
     // total Score calculated by:
-    //   Metal to Mantle to Crust Ratio +
-    //   Total Mass of Psyche compared to actual mass
+    //   MakeUp score (greater other particle count = less score) +
+    //   Total Mass of Psyche compared to actual mass score
     public void HandleEvaluateClick()
     {
-        // // Debug.Log("Evaluate Clicked");
-        /*scoreValue =
-            GameObject
-                .Find("Canvas - HUD/HUD Parent/CurScore")
-                .GetComponent<TMPro.TextMeshProUGUI>();
-        */
-
         //Used to hold the scores for each
         double totalScore = 0;
         double massScore = 0;
@@ -657,8 +622,6 @@ public class UserInputToAsteroid : MonoBehaviour
             materialInput = "Metal";
             otherAsteroid.tag = "OA_MetalCore_Particle";
             renderer.color = new Color(0.8588236f, 0.3686275f, 0f, 1f);
-            //otherAsteroidColor = new Color(0.8588236f, 0.3686275f, 0f, 1f);
-            //otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
         }
         
         else if (val == 1)
@@ -666,16 +629,12 @@ public class UserInputToAsteroid : MonoBehaviour
             materialInput = "Mantle";
             otherAsteroid.tag = "OA_Mantle_Particle";
             renderer.color = new Color(0.5566f, 0.2389f, 0f, 1f);
-            //otherAsteroidColor = new Color(0.5566f, 0.2389f, 0f, 1f);
-            // otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
         }
         else if (val == 2)
         {
             materialInput = "Crust";
             otherAsteroid.tag = "OA_Crust_Particle";
             renderer.color = new Color(0.3113f, 0.1344f, 0.0011f, 1f);
-            //otherAsteroidColor = new Color(0.3113f, 0.1344f, 0.0011f, 1f);
-            //otherAsteroidRenderer.material.SetColor("_Color", otherAsteroidColor);
         }
         else { materialInput = "Something went wrong (materialInput)"; }
     }
